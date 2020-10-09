@@ -1,0 +1,16 @@
+{
+    "namespace" : "ODP_NAMESPACE",
+    "fqdn" : "FQDN",
+    "release" : "RELEASE",
+    "sec_header_access_control_allow_origin": "SEC_HEADER_ACCESS_CONTROL_ALLOW_ORIGIN",
+    "sec_header_access_control_allow_methods": "SEC_HEADER_ACCESS_CONTROL_ALLOW_METHODS",
+    "sec_header_access_control_allow_headers": "SEC_HEADER_ACCESS_CONTROL_ALLOW_HEADERS",
+    "sec_header_strict_transport_security": "SEC_HEADER_STRICT_TRANSPORT_SECURITY",
+    "sec_header_server": "SEC_HEADER_SERVER",
+    "sec_header_x_frame_option": "SEC_HEADER_X_FRAME_OPTION",
+    "sec_header_x_powered_by": "SEC_HEADER_X_POWERED_BY",
+    "sec_header_x_xss_protection": "SEC_HEADER_X_XSS_PROTECTION",
+    "sec_header_x_content_type_option": "SEC_HEADER_X_CONTENT_TYPE_OPTION",
+    "sec_header_cache_control": "SEC_HEADER_CACHE_CONTROL",
+    "sec_header_content_security_policy": "SEC_HEADER_CONTENT_SECURITY_POLICY"
+}

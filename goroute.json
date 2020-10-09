@@ -1,0 +1,131 @@
+{
+  "host": "0.0.0.0",
+  "port": "32001",
+  "compression": true,
+  "security": {
+    "enabled": true,
+    "certPath": "./keys/odp_server.crt",
+    "keyPath": "./keys/odp_server.key",
+    "minTLSVersion": "TLS 1.2",
+    "maxTLSVersion": "TLS 1.3"
+  },
+  "caching": {
+    "enabled": false,
+    "endpoint": "0.0.0.0:11211"
+  },
+  "routes": [
+    {
+      "path": "/socket.io",
+      "headers": {
+        "request": {},
+        "response": {
+          "Host": "$fqdn$",
+          "Access-Control-Allow-Origin": "$sec_header_access_control_allow_origin$",
+          "Access-Control-Allow-Methods": "$sec_header_access_control_allow_methods$",
+          "Access-Control-Allow-Headers": "$sec_header_access_control_allow_headers$",
+          "Strict-Transport-Security": "$sec_header_strict_transport_security$",
+          "Server": "$sec_header_server$",
+          "X-Powered-By": "$sec_header_x_powered_by$",
+          "X-XSS-Protection": "$sec_header_x_xss_protection$",
+          "X-Content-Type-Option": "$sec_header_x_content_type_option$",
+          "Cache-Control": "$sec_header_cache_control$",
+          "X-Frame-Options": "$sec_header_x_frame_option$",
+          "Content-Security-Policy ": "$sec_header_content_security_policy$"
+        }
+      },
+      "target": "http://gw.$namespace$/socket.io",
+      "targetType": "URL"
+    },
+    {
+      "path": "/api",
+      "headers": {
+        "request": {},
+        "response": {
+          "Host": "$fqdn$",
+          "Access-Control-Allow-Origin": "$sec_header_access_control_allow_origin$",
+          "Access-Control-Allow-Methods": "$sec_header_access_control_allow_methods$",
+          "Access-Control-Allow-Headers": "$sec_header_access_control_allow_headers$",
+          "Strict-Transport-Security": "$sec_header_strict_transport_security$",
+          "Server": "$sec_header_server$",
+          "X-Powered-By": "$sec_header_x_powered_by$",
+          "X-XSS-Protection": "$sec_header_x_xss_protection$",
+          "X-Content-Type-Option": "$sec_header_x_content_type_option$",
+          "Cache-Control": "$sec_header_cache_control$",
+          "X-Frame-Options": "$sec_header_x_frame_option$",
+          "Content-Security-Policy ": "$sec_header_content_security_policy$"
+        }
+      },
+      "target": "http://gw.$namespace$/api",
+      "targetType": "URL"
+    },
+    {
+      "path": "/author",
+      "headers": {
+        "request": {},
+        "response": {
+          "Host": "$fqdn$",
+          "Access-Control-Allow-Origin": "$sec_header_access_control_allow_origin$",
+          "Access-Control-Allow-Methods": "$sec_header_access_control_allow_methods$",
+          "Access-Control-Allow-Headers": "$sec_header_access_control_allow_headers$",
+          "Strict-Transport-Security": "$sec_header_strict_transport_security$",
+          "Server": "$sec_header_server$",
+          "X-Powered-By": "$sec_header_x_powered_by$",
+          "X-XSS-Protection": "$sec_header_x_xss_protection$",
+          "X-Content-Type-Option": "$sec_header_x_content_type_option$",
+          "Cache-Control": "$sec_header_cache_control$",
+          "X-Frame-Options": "$sec_header_x_frame_option$",
+          "Content-Security-Policy ": "$sec_header_content_security_policy$"
+        }
+      },
+      "target": "./author",
+      "targetType": "STATIC",
+      "cacheExpiry": 10
+    },
+    {
+      "path": "/appcenter",
+      "headers": {
+        "request": {},
+        "response": {
+          "Host": "$fqdn$",
+          "Access-Control-Allow-Origin": "$sec_header_access_control_allow_origin$",
+          "Access-Control-Allow-Methods": "$sec_header_access_control_allow_methods$",
+          "Access-Control-Allow-Headers": "$sec_header_access_control_allow_headers$",
+          "Strict-Transport-Security": "$sec_header_strict_transport_security$",
+          "Server": "$sec_header_server$",
+          "X-Powered-By": "$sec_header_x_powered_by$",
+          "X-XSS-Protection": "$sec_header_x_xss_protection$",
+          "X-Content-Type-Option": "$sec_header_x_content_type_option$",
+          "Cache-Control": "$sec_header_cache_control$",
+          "X-Frame-Options": "$sec_header_x_frame_option$",
+          "Content-Security-Policy ": "$sec_header_content_security_policy$"
+        }
+      },
+      "target": "./appcenter",
+      "targetType": "STATIC",
+      "cacheExpiry": 10
+    },
+    {
+      "path": "/doc",
+      "headers": {
+        "request": {},
+        "response": {
+          "Host": "$fqdn$",
+          "Access-Control-Allow-Origin": "$sec_header_access_control_allow_origin$",
+          "Access-Control-Allow-Methods": "$sec_header_access_control_allow_methods$",
+          "Access-Control-Allow-Headers": "$sec_header_access_control_allow_headers$",
+          "Strict-Transport-Security": "$sec_header_strict_transport_security$",
+          "Server": "$sec_header_server$",
+          "X-Powered-By": "$sec_header_x_powered_by$",
+          "X-XSS-Protection": "$sec_header_x_xss_protection$",
+          "X-Content-Type-Option": "$sec_header_x_content_type_option$",
+          "Cache-Control": "$sec_header_cache_control$",
+          "X-Frame-Options": "$sec_header_x_frame_option$",
+          "Content-Security-Policy ": "$sec_header_content_security_policy$"
+        }
+      },
+      "target": "./swaggerUI",
+      "targetType": "STATIC",
+      "cacheExpiry": 10
+    }
+  ]
+}
