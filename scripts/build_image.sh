@@ -113,7 +113,7 @@ if [ -f $WORKSPACE/../CLEAN_BUILD_PROXY ]; then
     openssl req -out odp_server.csr -new -newkey rsa:2048 -nodes -keyout odp_server.key  -subj "/C=US/ST=California/L=PaloAlto/O=CAPIOT/OU=Engineering/CN=it@capiot.com"
     openssl x509 -signkey odp_server.key -in odp_server.csr -req -days 365 -out odp_server.crt
     
-    docker build --no-cache -t odp:nginx.$TAG --build-arg TAG=$HOTFIX --build-arg LATEST_APPCENTER=$LATEST_APPCENTER --build-arg LATEST_AUTHOR=$LATEST_AUTHOR --build-arg LATEST_SWAGGER=$LATEST_SWAGGER .
+    docker build --no-cache -t odp:proxy.$TAG --build-arg TAG=$HOTFIX --build-arg LATEST_APPCENTER=$LATEST_APPCENTER --build-arg LATEST_AUTHOR=$LATEST_AUTHOR --build-arg LATEST_SWAGGER=$LATEST_SWAGGER .
     rm $WORKSPACE/../CLEAN_BUILD_PROXY
 
     echo "****************************************************"
@@ -128,8 +128,8 @@ if [ -f $WORKSPACE/../CLEAN_BUILD_PROXY ]; then
         sed -i.bak '/imagePullSecrets/d' proxy.yaml
         sed -i.bak '/- name: regsecret/d' proxy.yaml
 
-        kubectl delete deploy nginx -n $ODP_NS || true # deleting old deployement
-        kubectl delete service nginx -n $ODP_NS || true # deleting old service
+        kubectl delete deploy proxy -n $ODP_NS || true # deleting old deployement
+        kubectl delete service proxy -n $ODP_NS || true # deleting old service
         #creating pmw deployment
         kubectl create -f proxy.yaml
     fi
@@ -138,9 +138,9 @@ else
     echo "****************************************************"
     echo "odp:proxy :: Doing a normal build"
     echo "****************************************************"
-    docker build -t odp:nginx.$TAG --build-arg TAG=$HOTFIX --build-arg LATEST_APPCENTER=$LATEST_APPCENTER --build-arg LATEST_AUTHOR=$LATEST_AUTHOR --build-arg LATEST_SWAGGER=$LATEST_SWAGGER .
+    docker build -t odp:proxy.$TAG --build-arg TAG=$HOTFIX --build-arg LATEST_APPCENTER=$LATEST_APPCENTER --build-arg LATEST_AUTHOR=$LATEST_AUTHOR --build-arg LATEST_SWAGGER=$LATEST_SWAGGER .
     if [ $CICD ]; then
-        kubectl set image deployment/nginx nginx=odp:nginx.$TAG -n $ODP_NS --record=true
+        kubectl set image deployment/proxy proxy=odp:proxy.$TAG -n $ODP_NS --record=true
     fi
 fi
 if [ $DOCKER_REG ]; then
@@ -148,8 +148,8 @@ if [ $DOCKER_REG ]; then
     echo "odp:proxy :: Docker Registry found, pushing image"
     echo "****************************************************"
 
-    docker tag odp:nginx.$TAG $DOCKER_REG/odp:nginx.$TAG
-    docker push $DOCKER_REG/odp:nginx.$TAG
+    docker tag odp:proxy.$TAG $DOCKER_REG/odp:proxy.$TAG
+    docker push $DOCKER_REG/odp:proxy.$TAG
 fi
 echo "****************************************************"
 echo "odp:proxy :: BUILD SUCCESS :: odp:proxy.$TAG"
