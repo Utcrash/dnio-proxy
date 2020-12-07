@@ -28,6 +28,6 @@
 
 ### Providing dynamic environment values
   - Provide values enwrapped with $ at both start and end. Ex - $namespace$
-  - Provide environment variable name for value in environment config file. Ex - "namespace" : "ODP_NAMESPACE"
+  - Provide environment variable name for value in environment config file. Ex - "namespace" : "DATA_STACK_NAMESPACE"
   - Sample config and enviroment files are present in repo. 
 

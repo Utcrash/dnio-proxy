@@ -1,5 +1,5 @@
 {
-    "namespace" : "ODP_NAMESPACE",
+    "namespace" : "DATA_STACK_NAMESPACE",
     "fqdn" : "FQDN",
     "release" : "RELEASE",
     "sec_header_access_control_allow_origin": "SEC_HEADER_ACCESS_CONTROL_ALLOW_ORIGIN",

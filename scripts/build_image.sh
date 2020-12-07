@@ -2,8 +2,8 @@
 set -e
 if [ -f $WORKSPACE/../TOGGLE ]; then
     echo "****************************************************"
-    echo "odp:proxy :: Toggle mode is on, terminating build"
-    echo "odp:proxy :: BUILD CANCLED"
+    echo "data.stack:proxy :: Toggle mode is on, terminating build"
+    echo "data.stack:proxy :: BUILD CANCLED"
     echo "****************************************************"
     exit 0
 fi
@@ -15,8 +15,8 @@ cDate=`date +%Y.%m.%d.%H.%M` #Current date and time
 if [ -f $WORKSPACE/../CICD ]; then
     CICD=`cat $WORKSPACE/../CICD`
 fi
-if [ -f $WORKSPACE/../ODP_RELEASE ]; then
-    REL=`cat $WORKSPACE/../ODP_RELEASE`
+if [ -f $WORKSPACE/../DATA_STACK_RELEASE ]; then
+    REL=`cat $WORKSPACE/../DATA_STACK_RELEASE`
 fi
 if [ -f $WORKSPACE/../DOCKER_REGISTRY ]; then
     DOCKER_REG=`cat $WORKSPACE/../DOCKER_REGISTRY`
@@ -39,8 +39,8 @@ if [ $1 ]; then
 fi
 if [ ! $REL ]; then
     echo "****************************************************"
-    echo "odp:proxy :: Please Create file ODP_RELEASE with the releaese at $WORKSPACE or provide it as 1st argument of this script."
-    echo "odp:proxy :: BUILD FAILED"
+    echo "data.stack:proxy :: Please Create file DATA_STACK_RELEASE with the releaese at $WORKSPACE or provide it as 1st argument of this script."
+    echo "data.stack:proxy :: BUILD FAILED"
     echo "****************************************************"
     exit 0
 fi
@@ -54,49 +54,49 @@ if [ $3 ]; then
 fi
 if [ $CICD ]; then
     echo "****************************************************"
-    echo "odp:proxy :: CICI env found"
+    echo "data.stack:proxy :: CICI env found"
     echo "****************************************************"
     TAG=$TAG"_"$cDate
-    if [ ! -f $WORKSPACE/../ODP_NAMESPACE ]; then
+    if [ ! -f $WORKSPACE/../DATA_STACK_NAMESPACE ]; then
         echo "****************************************************"
-        echo "odp:proxy :: Please Create file ODP_NAMESPACE with the namespace at $WORKSPACE"
-        echo "odp:proxy :: BUILD FAILED"
+        echo "data.stack:proxy :: Please Create file DATA_STACK_NAMESPACE with the namespace at $WORKSPACE"
+        echo "data.stack:proxy :: BUILD FAILED"
         echo "****************************************************"
         exit 0
     fi
-    ODP_NS=`cat $WORKSPACE/../ODP_NAMESPACE`
+    DATA_STACK_NS=`cat $WORKSPACE/../DATA_STACK_NAMESPACE`
 fi
 cd $WORKSPACE
 # echo "****************************************************"
-# echo "odp:proxy :: Copying odp-ui-author files"
+# echo "data.stack:proxy :: Copying ds-ui-author files"
 # echo "****************************************************"
 # if [ ! -d author ]; then
 #     mkdir author
 # else
 #     rm -rf author/*
 # fi
-# cp -r $WORKSPACE/../odp-ui-author/dist/* author/
+# cp -r $WORKSPACE/../ds-ui-author/dist/* author/
 # echo "****************************************************"
-# echo "odp:proxy :: Copying odp-ui-appcenter files"
+# echo "data.stack:proxy :: Copying ds-ui-appcenter files"
 # echo "****************************************************"
 # if [ ! -d appcenter ]; then
 #     mkdir appcenter
 # else
 #     rm -rf appcenter/*
 # fi
-# cp -r $WORKSPACE/../odp-ui-appcenter/dist/* appcenter/
+# cp -r $WORKSPACE/../ds-ui-appcenter/dist/* appcenter/
 # echo "****************************************************"
-# echo "odp:proxy :: Copying odp-ui-swagger files"
+# echo "data.stack:proxy :: Copying ds-ui-swagger files"
 # echo "****************************************************"
 # if [ ! -d swaggerUI ]; then
 #     mkdir swaggerUI
 # else
 #     rm -rf swaggerUI/*
 # fi
-# cp -r $WORKSPACE/../odp-ui-swagger/* swaggerUI/
+# cp -r $WORKSPACE/../ds-ui-swagger/* swaggerUI/
 
 echo "****************************************************"
-echo "odp:proxy :: using build :: "$TAG
+echo "data.stack:proxy :: using build :: "$TAG
 echo "****************************************************"
 
 sh $WORKSPACE/scripts/prepare_yaml.sh $REL $2
@@ -105,53 +105,53 @@ sh $WORKSPACE/scripts/prepare_yaml.sh $REL $2
 
 if [ -f $WORKSPACE/../CLEAN_BUILD_PROXY ]; then
     echo "****************************************************"
-    echo "odp:proxy :: Doing a clean build"
+    echo "data.stack:proxy :: Doing a clean build"
     echo "****************************************************"
     echo "****************************************************"
     echo " Generating key and cert to package"
     echo "****************************************************"
-    openssl req -out odp_server.csr -new -newkey rsa:2048 -nodes -keyout odp_server.key  -subj "/C=US/ST=California/L=PaloAlto/O=CAPIOT/OU=Engineering/CN=it@capiot.com"
-    openssl x509 -signkey odp_server.key -in odp_server.csr -req -days 365 -out odp_server.crt
+    openssl req -out data_stack_server.csr -new -newkey rsa:2048 -nodes -keyout data_stack_server.key  -subj "/C=US/ST=California/L=PaloAlto/O=CAPIOT/OU=Engineering/CN=it@capiot.com"
+    openssl x509 -signkey data_stack_server.key -in data_stack_server.csr -req -days 365 -out data_stack_server.crt
     
-    docker build --no-cache -t odp:proxy.$TAG --build-arg TAG=$HOTFIX --build-arg LATEST_APPCENTER=$LATEST_APPCENTER --build-arg LATEST_AUTHOR=$LATEST_AUTHOR --build-arg LATEST_SWAGGER=$LATEST_SWAGGER .
+    docker build --no-cache -t data.stack:proxy.$TAG --build-arg TAG=$HOTFIX --build-arg LATEST_APPCENTER=$LATEST_APPCENTER --build-arg LATEST_AUTHOR=$LATEST_AUTHOR --build-arg LATEST_SWAGGER=$LATEST_SWAGGER .
     rm $WORKSPACE/../CLEAN_BUILD_PROXY
 
     echo "****************************************************"
-    echo "odp:proxy :: Copying deployment files"
+    echo "data.stack:proxy :: Copying deployment files"
     echo "****************************************************"
 
     if [ $CICD ]; then
         sed -i.bak s#__docker_registry_server__#$DOCKER_REG# proxy.yaml
         sed -i.bak s/__release_tag__/"'$REL'"/ proxy.yaml
         sed -i.bak s#__release__#$TAG# proxy.yaml
-        sed -i.bak s#__namespace__#$ODP_NS# proxy.yaml
+        sed -i.bak s#__namespace__#$DATA_STACK_NS# proxy.yaml
         sed -i.bak '/imagePullSecrets/d' proxy.yaml
         sed -i.bak '/- name: regsecret/d' proxy.yaml
 
-        kubectl delete deploy proxy -n $ODP_NS || true # deleting old deployement
-        kubectl delete service proxy -n $ODP_NS || true # deleting old service
+        kubectl delete deploy proxy -n $DATA_STACK_NS || true # deleting old deployement
+        kubectl delete service proxy -n $DATA_STACK_NS || true # deleting old service
         #creating pmw deployment
         kubectl create -f proxy.yaml
     fi
 
 else
     echo "****************************************************"
-    echo "odp:proxy :: Doing a normal build"
+    echo "data.stack:proxy :: Doing a normal build"
     echo "****************************************************"
-    docker build -t odp:proxy.$TAG --build-arg TAG=$HOTFIX --build-arg LATEST_APPCENTER=$LATEST_APPCENTER --build-arg LATEST_AUTHOR=$LATEST_AUTHOR --build-arg LATEST_SWAGGER=$LATEST_SWAGGER .
+    docker build -t data.stack:proxy.$TAG --build-arg TAG=$HOTFIX --build-arg LATEST_APPCENTER=$LATEST_APPCENTER --build-arg LATEST_AUTHOR=$LATEST_AUTHOR --build-arg LATEST_SWAGGER=$LATEST_SWAGGER .
     if [ $CICD ]; then
-        kubectl set image deployment/proxy proxy=odp:proxy.$TAG -n $ODP_NS --record=true
+        kubectl set image deployment/proxy proxy=data.stack:proxy.$TAG -n $DATA_STACK_NS --record=true
     fi
 fi
 if [ $DOCKER_REG ]; then
     echo "****************************************************"
-    echo "odp:proxy :: Docker Registry found, pushing image"
+    echo "data.stack:proxy :: Docker Registry found, pushing image"
     echo "****************************************************"
 
-    docker tag odp:proxy.$TAG $DOCKER_REG/odp:proxy.$TAG
-    docker push $DOCKER_REG/odp:proxy.$TAG
+    docker tag data.stack:proxy.$TAG $DOCKER_REG/data.stack:proxy.$TAG
+    docker push $DOCKER_REG/data.stack:proxy.$TAG
 fi
 echo "****************************************************"
-echo "odp:proxy :: BUILD SUCCESS :: odp:proxy.$TAG"
+echo "data.stack:proxy :: BUILD SUCCESS :: data.stack:proxy.$TAG"
 echo "****************************************************"
 echo $TAG > $WORKSPACE/../LATEST_PROXY
