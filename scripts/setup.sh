@@ -2,7 +2,7 @@
 
 cd $WORKSPACE
 echo "****************************************************"
-echo "odp:proxy :: Fetching dependencies"
+echo "data.stack:proxy :: Fetching dependencies"
 echo "****************************************************"
 go get -u github.com/bradfitz/gomemcache/memcache
 go get -u github.com/NYTimes/gziphandler

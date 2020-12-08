@@ -25,9 +25,9 @@ RUN env GOOS=linux GOARCH=386 go build -ldflags="-s -w" -o goroute .
 # ODP Proxy build
 ###############################################################################################
 
-FROM odp:ui-author.$LATEST_APPCENTER AS author
-FROM odp:ui-appcenter.$LATEST_AUTHOR AS appcenter
-FROM odp:ui-swaggerUI.$LATEST_SWAGGER AS swaggerUI
+FROM data.stack:ui-author.$LATEST_APPCENTER AS author
+FROM data.stack:ui-appcenter.$LATEST_AUTHOR AS appcenter
+FROM data.stack:ui-swaggerUI.$LATEST_SWAGGER AS swaggerUI
 
 FROM alpine
 

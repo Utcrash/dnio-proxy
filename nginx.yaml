@@ -38,7 +38,7 @@ spec:
           secretName: odp-nginx-sec
       containers:
         - name: nginx
-          image: '__docker_registry_server__/odp:nginx.__release__'
+          image: '__docker_registry_server__/data.stack:nginx.__release__'
           ports:
             - containerPort: 32001
           volumeMounts:
