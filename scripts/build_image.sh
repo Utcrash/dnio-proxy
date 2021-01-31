@@ -1,3 +1,4 @@
+
 #!/bin/bash
 set -e
 if [ -f $WORKSPACE/../TOGGLE ]; then
@@ -140,7 +141,11 @@ else
     echo "****************************************************"
     docker build -t data.stack:proxy.$TAG --build-arg TAG=$HOTFIX --build-arg LATEST_APPCENTER=$LATEST_APPCENTER --build-arg LATEST_AUTHOR=$LATEST_AUTHOR --build-arg LATEST_SWAGGER=$LATEST_SWAGGER .
     if [ $CICD ]; then
-        kubectl set image deployment/proxy proxy=data.stack:proxy.$TAG -n $DATA_STACK_NS --record=true
+        if [ $DOCKER_REG ]; then
+            kubectl set image deployment/proxy proxy=$DOCKER_REG/data.stack:proxy.$TAG -n $DATA_STACK_NS --record=true
+        else 
+            kubectl set image deployment/proxy proxy=data.stack:proxy.$TAG -n $DATA_STACK_NS --record=true
+        fi
     fi
 fi
 if [ $DOCKER_REG ]; then
