@@ -22,7 +22,7 @@ COPY /reverseproxy.go /
 RUN env GOOS=linux GOARCH=386 go build -ldflags="-s -w" -o goroute .
 
 ###############################################################################################
-# ODP Proxy build
+# data.stack Proxy build
 ###############################################################################################
 
 FROM data.stack:ui-author.$LATEST_APPCENTER AS author
