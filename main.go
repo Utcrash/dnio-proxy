@@ -48,6 +48,10 @@ func main() {
 		}
 		for k, v := range env {
 			environmentValue := os.Getenv(v)
+			if v == "PROXY_ENABLE_TLS" && environmentValue == "" {
+				environmentValue = "true"
+				log.Println("PROXY_ENABLE_TLS not set. Setting it to 'true' by default.")
+			}
 			log.Println("Replaces Env Value = ", "$"+k+"$", " = ", environmentValue)
 			jsonContent = strings.Replace(jsonContent, "$"+k+"$", environmentValue, -1)
 		}
@@ -132,7 +136,8 @@ func StartRouter(config Config) error {
 		}
 	}
 	log.Println("Starting server at " + config.Host + ":" + config.Port)
-	if config.Security.Enabled {
+	if strings.ToLower(config.Security.Enabled) == "true" {
+		log.Println("Server will start with TLS enabled")
 		cipherSuites := []uint16{
 			tls.TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256,
 			tls.TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384,
@@ -158,6 +163,8 @@ func StartRouter(config Config) error {
 			TLSConfig: cfg,
 		}
 		return srv.ListenAndServeTLS(config.Security.CertPath, config.Security.KeyPath)
+	} else {
+		log.Println("Server will start with TLS DISABLED")
 	}
 	return http.ListenAndServe(config.Host+":"+config.Port, r)
 }

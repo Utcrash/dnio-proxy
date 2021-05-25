@@ -3,7 +3,7 @@
   "port": "32001",
   "compression": true,
   "security": {
-    "enabled": true,
+    "enabled": "$proxy_enable_tls$",
     "certPath": "./keys/odp_server.crt",
     "keyPath": "./keys/odp_server.key",
     "minTLSVersion": "TLS 1.2",

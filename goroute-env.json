@@ -1,7 +1,8 @@
 {
-    "namespace" : "DATA_STACK_NAMESPACE",
-    "fqdn" : "FQDN",
-    "release" : "RELEASE",
+    "namespace": "DATA_STACK_NAMESPACE",
+    "fqdn": "FQDN",
+    "release": "RELEASE",
+    "proxy_enable_tls": "PROXY_ENABLE_TLS",
     "sec_header_access_control_allow_origin": "SEC_HEADER_ACCESS_CONTROL_ALLOW_ORIGIN",
     "sec_header_access_control_allow_methods": "SEC_HEADER_ACCESS_CONTROL_ALLOW_METHODS",
     "sec_header_access_control_allow_headers": "SEC_HEADER_ACCESS_CONTROL_ALLOW_HEADERS",

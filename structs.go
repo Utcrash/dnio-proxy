@@ -12,7 +12,7 @@ type Config struct {
 
 //Security - struct for security details
 type Security struct {
-	Enabled       bool   `json:"enabled"`
+	Enabled       string `json:"enabled"`
 	CertPath      string `json:"certPath"`
 	KeyPath       string `json:"keyPath"`
 	MinTLSVersion string `json:"minTLSVersion"`
