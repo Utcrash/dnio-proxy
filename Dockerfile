@@ -13,7 +13,7 @@ COPY go.mod /
 
 COPY go.sum /
 
-RUN go mod init
+RUN go get
 
 COPY /main.go /
 COPY /fs-cache.go /
