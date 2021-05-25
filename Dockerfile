@@ -13,12 +13,15 @@ COPY go.mod /app
 
 COPY go.sum /app
 
-RUN ls -l && go get
-
 COPY main.go /app
+
 COPY fs-cache.go /app
+
 COPY structs.go /app
+
 COPY reverseproxy.go /app
+
+RUN ls -l && go get
 
 RUN env GOOS=linux GOARCH=386 go build -ldflags="-s -w" -o goroute .
 
