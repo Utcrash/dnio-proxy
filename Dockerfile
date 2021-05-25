@@ -7,18 +7,18 @@ ARG LATEST_SWAGGER=dev
 ###############################################################################################
 FROM golang:1.16 AS build
 
-WORKDIR /
+WORKDIR /app
 
-COPY go.mod /
+COPY go.mod /app
 
-COPY go.sum /
+COPY go.sum /app
 
 RUN ls -l && go get
 
-COPY /main.go /
-COPY /fs-cache.go /
-COPY /structs.go /
-COPY /reverseproxy.go /
+COPY main.go /app
+COPY fs-cache.go /app
+COPY structs.go /app
+COPY reverseproxy.go /app
 
 RUN env GOOS=linux GOARCH=386 go build -ldflags="-s -w" -o goroute .
 
@@ -34,7 +34,7 @@ FROM alpine
 
 WORKDIR /app
 
-COPY --from=build /goroute /app/
+COPY --from=build /app/goroute /app/
 
 COPY --from=author /app/dist/ /app/author/
 
