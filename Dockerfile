@@ -9,10 +9,11 @@ FROM golang:1.13 AS build
 
 WORKDIR /
 
-COPY /scripts/setup.sh /
+COPY go.mod /
 
-RUN chmod +x setup.sh \
-  && sh setup.sh 
+COPY go.sum /
+
+RUN go mod init
 
 COPY /main.go /
 COPY /fs-cache.go /
