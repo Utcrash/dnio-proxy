@@ -37,6 +37,28 @@
       "targetType": "URL"
     },
     {
+      "path": "/b2b",
+      "headers": {
+        "request": {},
+        "response": {
+          "Host": "$fqdn$",
+          "Access-Control-Allow-Origin": "$sec_header_access_control_allow_origin$",
+          "Access-Control-Allow-Methods": "$sec_header_access_control_allow_methods$",
+          "Access-Control-Allow-Headers": "$sec_header_access_control_allow_headers$",
+          "Strict-Transport-Security": "$sec_header_strict_transport_security$",
+          "Server": "$sec_header_server$",
+          "X-Powered-By": "$sec_header_x_powered_by$",
+          "X-XSS-Protection": "$sec_header_x_xss_protection$",
+          "X-Content-Type-Option": "$sec_header_x_content_type_option$",
+          "Cache-Control": "$sec_header_cache_control$",
+          "X-Frame-Options": "$sec_header_x_frame_option$",
+          "Content-Security-Policy ": "$sec_header_content_security_policy$"
+        }
+      },
+      "target": "http://bm.$namespace$/b2b",
+      "targetType": "URL"
+    },
+    {
       "path": "/api",
       "headers": {
         "request": {},
