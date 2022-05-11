@@ -33,7 +33,7 @@ FROM data.stack:ui-author.$LATEST_APPCENTER AS author
 FROM data.stack:ui-appcenter.$LATEST_AUTHOR AS appcenter
 FROM data.stack:ui-swaggerUI.$LATEST_SWAGGER AS swaggerUI
 
-FROM alpine:3.15.0
+FROM alpine:latest
 
 RUN apk update
 RUN apk upgrade
