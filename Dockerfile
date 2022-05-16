@@ -31,7 +31,7 @@ RUN env GOOS=linux GOARCH=386 go build -ldflags="-s -w" -o goroute .
 
 FROM data.stack.ui-author:$LATEST_APPCENTER AS author
 FROM data.stack.ui-appcenter:$LATEST_AUTHOR AS appcenter
-FROM data.stack.ui-swaggerUI:$LATEST_SWAGGER AS swaggerUI
+FROM data.stack.ui-swagger:$LATEST_SWAGGER AS swaggerUI
 
 FROM alpine:latest
 
