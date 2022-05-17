@@ -29,9 +29,9 @@ echo "****************************************************"
 echo "data.stack:proxy :: Image Pushed to Docker Hub AS appveen/data.stack.ui-appcenter:$TAG"
 echo "****************************************************"
 
-docker tag data.stack.ui-swaggerUI:$TAG appveen/data.stack.ui-swaggerUI:$TAG
-docker push appveen/data.stack.ui-swaggerUI:$TAG
+docker tag data.stack.ui-swagger:$TAG appveen/data.stack.ui-swagger:$TAG
+docker push appveen/data.stack.ui-swagger:$TAG
 
 echo "****************************************************"
-echo "data.stack:proxy :: Image Pushed to Docker Hub AS appveen/data.stack.ui-swaggerUI:$TAG"
+echo "data.stack:proxy :: Image Pushed to Docker Hub AS appveen/data.stack.ui-swagger:$TAG"
 echo "****************************************************"

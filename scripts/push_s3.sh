@@ -38,11 +38,11 @@ echo "data.stack:proxy :: Image Saved to AWS S3 AS data.stack.ui-appcenter_$TAG.
 echo "****************************************************"
 
 
-docker save -o data.stack.ui-swaggerUI_$TAG.tar data.stack.ui-swaggerUI:$TAG
-bzip2 data.stack.ui-swaggerUI_$TAG.tar
-aws s3 cp data.stack.ui-swaggerUI_$TAG.tar.bz2 s3://$S3_BUCKET/stable-builds/$TODAY_FOLDER/data.stack.ui-swaggerUI_$TAG.tar.bz2
-rm data.stack.ui-swaggerUI_$TAG.tar.bz2
+docker save -o data.stack.ui-swagger_$TAG.tar data.stack.ui-swagger:$TAG
+bzip2 data.stack.ui-swagger_$TAG.tar
+aws s3 cp data.stack.ui-swagger_$TAG.tar.bz2 s3://$S3_BUCKET/stable-builds/$TODAY_FOLDER/data.stack.ui-swagger_$TAG.tar.bz2
+rm data.stack.ui-swagger_$TAG.tar.bz2
 
 echo "****************************************************"
-echo "data.stack:proxy :: Image Saved to AWS S3 AS data.stack.ui-swaggerUI_$TAG.tar.bz2"
+echo "data.stack:proxy :: Image Saved to AWS S3 AS data.stack.ui-swagger_$TAG.tar.bz2"
 echo "****************************************************"
