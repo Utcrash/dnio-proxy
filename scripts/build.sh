@@ -11,7 +11,11 @@ echo "****************************************************"
 
 cd $WORKSPACE/ds-ui-author
 
-docker build -t data.stack.ui-author:$TAG .
+if [ $cleanBuild ]; then
+    docker build --no-cache -t data.stack.ui-author:$TAG .
+else 
+    docker build -t data.stack.ui-author:$TAG .
+fi
 
 
 echo "****************************************************"
@@ -24,7 +28,11 @@ echo "****************************************************"
 
 cd $WORKSPACE/ds-ui-appcenter
 
-docker build -t data.stack.ui-appcenter:$TAG .
+if [ $cleanBuild ]; then
+    docker build --no-cache -t data.stack.ui-appcenter:$TAG .
+else 
+    docker build -t data.stack.ui-appcenter:$TAG .
+fi
 
 
 echo "****************************************************"
@@ -38,7 +46,11 @@ echo "****************************************************"
 
 cd $WORKSPACE/ds-ui-swagger
 
-docker build -t data.stack.ui-swagger:$TAG .
+if [ $cleanBuild ]; then
+    docker build --no-cache -t data.stack.ui-swagger:$TAG .
+else 
+    docker build -t data.stack.ui-swagger:$TAG .
+fi
 
 
 echo "****************************************************"
@@ -52,7 +64,11 @@ echo "****************************************************"
 
 cd $WORKSPACE
 
-docker build -t data.stack.proxy:$TAG --build-arg LATEST_APPCENTER=$TAG --build-arg LATEST_AUTHOR=$TAG --build-arg LATEST_SWAGGER=$TAG .
+if [ $cleanBuild ]; then
+    docker build --no-cache -t data.stack.proxy:$TAG --build-arg LATEST_APPCENTER=$TAG --build-arg LATEST_AUTHOR=$TAG --build-arg LATEST_SWAGGER=$TAG .
+else 
+    docker build -t data.stack.proxy:$TAG --build-arg LATEST_APPCENTER=$TAG --build-arg LATEST_AUTHOR=$TAG --build-arg LATEST_SWAGGER=$TAG .
+fi
 
 
 echo "****************************************************"
