@@ -33,9 +33,9 @@ echo "data.stack:proxy :: Image pushed to ECR AS $ECR_URL/data.stack.ui-appcente
 echo "****************************************************"
 
 
-docker tag data.stack.ui-swaggerUI:$TAG $ECR_URL/data.stack.ui-swaggerUI:$TAG
-docker push $ECR_URL/data.stack.ui-swaggerUI:$TAG
+docker tag data.stack.ui-swagger:$TAG $ECR_URL/data.stack.ui-swagger:$TAG
+docker push $ECR_URL/data.stack.ui-swagger:$TAG
 
 echo "****************************************************"
-echo "data.stack:proxy :: Image pushed to ECR AS $ECR_URL/data.stack.ui-swaggerUI:$TAG"
+echo "data.stack:proxy :: Image pushed to ECR AS $ECR_URL/data.stack.ui-swagger:$TAG"
 echo "****************************************************"
