@@ -5,33 +5,33 @@ set -e
 TAG=`cat CURRENT_PROXY`
 
 echo "****************************************************"
-echo "data.stack:proxy :: Pushing Image to Docker Hub :: appveen/data.stack.proxy:$TAG"
+echo "datanimbus.io.proxy :: Pushing Image to Docker Hub :: appveen/datanimbus.io.proxy:$TAG"
 echo "****************************************************"
 
-docker tag data.stack.proxy:$TAG appveen/data.stack.proxy:$TAG
-docker push appveen/data.stack.proxy:$TAG
+docker tag datanimbus.io.proxy:$TAG appveen/datanimbus.io.proxy:$TAG
+docker push appveen/datanimbus.io.proxy:$TAG
 
 echo "****************************************************"
-echo "data.stack:proxy :: Image Pushed to Docker Hub AS appveen/data.stack.proxy:$TAG"
+echo "datanimbus.io.proxy :: Image Pushed to Docker Hub AS appveen/datanimbus.io.proxy:$TAG"
 echo "****************************************************"
 
-docker tag data.stack.ui-author:$TAG appveen/data.stack.ui-author:$TAG
-docker push appveen/data.stack.ui-author:$TAG
+docker tag datanimbus.io.ui-author:$TAG appveen/datanimbus.io.ui-author:$TAG
+docker push appveen/datanimbus.io.ui-author:$TAG
 
 echo "****************************************************"
-echo "data.stack:proxy :: Image Pushed to Docker Hub AS appveen/data.stack.ui-author:$TAG"
+echo "datanimbus.io.proxy :: Image Pushed to Docker Hub AS appveen/datanimbus.io.ui-author:$TAG"
 echo "****************************************************"
 
-docker tag data.stack.ui-appcenter:$TAG appveen/data.stack.ui-appcenter:$TAG
-docker push appveen/data.stack.ui-appcenter:$TAG
+docker tag datanimbus.io.ui-appcenter:$TAG appveen/datanimbus.io.ui-appcenter:$TAG
+docker push appveen/datanimbus.io.ui-appcenter:$TAG
 
 echo "****************************************************"
-echo "data.stack:proxy :: Image Pushed to Docker Hub AS appveen/data.stack.ui-appcenter:$TAG"
+echo "datanimbus.io.proxy :: Image Pushed to Docker Hub AS appveen/datanimbus.io.ui-appcenter:$TAG"
 echo "****************************************************"
 
-docker tag data.stack.ui-swagger:$TAG appveen/data.stack.ui-swagger:$TAG
-docker push appveen/data.stack.ui-swagger:$TAG
+docker tag datanimbus.io.ui-swagger:$TAG appveen/datanimbus.io.ui-swagger:$TAG
+docker push appveen/datanimbus.io.ui-swagger:$TAG
 
 echo "****************************************************"
-echo "data.stack:proxy :: Image Pushed to Docker Hub AS appveen/data.stack.ui-swagger:$TAG"
+echo "datanimbus.io.proxy :: Image Pushed to Docker Hub AS appveen/datanimbus.io.ui-swagger:$TAG"
 echo "****************************************************"

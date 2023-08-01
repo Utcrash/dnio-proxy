@@ -3,8 +3,8 @@
 set -e
 if [ -f $WORKSPACE/../TOGGLE ]; then
     echo "****************************************************"
-    echo "data.stack.proxy :: Toggle mode is on, terminating build"
-    echo "data.stack.proxy :: BUILD CANCLED"
+    echo "datanimbus.io.proxy :: Toggle mode is on, terminating build"
+    echo "datanimbus.io.proxy :: BUILD CANCLED"
     echo "****************************************************"
     exit 0
 fi
@@ -40,8 +40,8 @@ if [ $1 ]; then
 fi
 if [ ! $REL ]; then
     echo "****************************************************"
-    echo "data.stack.proxy :: Please Create file DATA_STACK_RELEASE with the releaese at $WORKSPACE or provide it as 1st argument of this script."
-    echo "data.stack.proxy :: BUILD FAILED"
+    echo "datanimbus.io.proxy :: Please Create file DATA_STACK_RELEASE with the releaese at $WORKSPACE or provide it as 1st argument of this script."
+    echo "datanimbus.io.proxy :: BUILD FAILED"
     echo "****************************************************"
     exit 0
 fi
@@ -55,13 +55,13 @@ if [ $3 ]; then
 fi
 if [ $CICD ]; then
     echo "****************************************************"
-    echo "data.stack.proxy :: CICI env found"
+    echo "datanimbus.io.proxy :: CICI env found"
     echo "****************************************************"
     TAG=$TAG"_"$cDate
     if [ ! -f $WORKSPACE/../DATA_STACK_NAMESPACE ]; then
         echo "****************************************************"
-        echo "data.stack.proxy :: Please Create file DATA_STACK_NAMESPACE with the namespace at $WORKSPACE"
-        echo "data.stack.proxy :: BUILD FAILED"
+        echo "datanimbus.io.proxy :: Please Create file DATA_STACK_NAMESPACE with the namespace at $WORKSPACE"
+        echo "datanimbus.io.proxy :: BUILD FAILED"
         echo "****************************************************"
         exit 0
     fi
@@ -69,7 +69,7 @@ if [ $CICD ]; then
 fi
 cd $WORKSPACE
 # echo "****************************************************"
-# echo "data.stack.proxy :: Copying ds-ui-author files"
+# echo "datanimbus.io.proxy :: Copying ds-ui-author files"
 # echo "****************************************************"
 # if [ ! -d author ]; then
 #     mkdir author
@@ -78,7 +78,7 @@ cd $WORKSPACE
 # fi
 # cp -r $WORKSPACE/../ds-ui-author/dist/* author/
 # echo "****************************************************"
-# echo "data.stack.proxy :: Copying ds-ui-appcenter files"
+# echo "datanimbus.io.proxy :: Copying ds-ui-appcenter files"
 # echo "****************************************************"
 # if [ ! -d appcenter ]; then
 #     mkdir appcenter
@@ -87,7 +87,7 @@ cd $WORKSPACE
 # fi
 # cp -r $WORKSPACE/../ds-ui-appcenter/dist/* appcenter/
 # echo "****************************************************"
-# echo "data.stack.proxy :: Copying ds-ui-swagger files"
+# echo "datanimbus.io.proxy :: Copying ds-ui-swagger files"
 # echo "****************************************************"
 # if [ ! -d swaggerUI ]; then
 #     mkdir swaggerUI
@@ -97,7 +97,7 @@ cd $WORKSPACE
 # cp -r $WORKSPACE/../ds-ui-swagger/* swaggerUI/
 
 echo "****************************************************"
-echo "data.stack.proxy :: using build :: "$TAG
+echo "datanimbus.io.proxy :: using build :: "$TAG
 echo "****************************************************"
 
 sh $WORKSPACE/scripts/prepare_yaml.sh $REL $2
@@ -106,7 +106,7 @@ sh $WORKSPACE/scripts/prepare_yaml.sh $REL $2
 
 if [ -f $WORKSPACE/../CLEAN_BUILD_PROXY ]; then
     echo "****************************************************"
-    echo "data.stack.proxy :: Doing a clean build"
+    echo "datanimbus.io.proxy :: Doing a clean build"
     echo "****************************************************"
     echo "****************************************************"
     echo " Generating key and cert to package"
@@ -114,11 +114,11 @@ if [ -f $WORKSPACE/../CLEAN_BUILD_PROXY ]; then
     openssl req -out data_stack_server.csr -new -newkey rsa:2048 -nodes -keyout data_stack_server.key  -subj "/C=US/ST=California/L=PaloAlto/O=CAPIOT/OU=Engineering/CN=it@capiot.com"
     openssl x509 -signkey data_stack_server.key -in data_stack_server.csr -req -days 365 -out data_stack_server.crt
     
-    docker build --no-cache -t data.stack.proxy:$TAG --build-arg TAG=$HOTFIX --build-arg LATEST_APPCENTER=$LATEST_APPCENTER --build-arg LATEST_AUTHOR=$LATEST_AUTHOR --build-arg LATEST_SWAGGER=$LATEST_SWAGGER .
+    docker build --no-cache -t datanimbus.io.proxy:$TAG --build-arg TAG=$HOTFIX --build-arg LATEST_APPCENTER=$LATEST_APPCENTER --build-arg LATEST_AUTHOR=$LATEST_AUTHOR --build-arg LATEST_SWAGGER=$LATEST_SWAGGER .
     rm $WORKSPACE/../CLEAN_BUILD_PROXY
 
     echo "****************************************************"
-    echo "data.stack.proxy :: Copying deployment files"
+    echo "datanimbus.io.proxy :: Copying deployment files"
     echo "****************************************************"
 
     if [ $CICD ]; then
@@ -137,26 +137,26 @@ if [ -f $WORKSPACE/../CLEAN_BUILD_PROXY ]; then
 
 else
     echo "****************************************************"
-    echo "data.stack.proxy :: Doing a normal build"
+    echo "datanimbus.io.proxy :: Doing a normal build"
     echo "****************************************************"
-    docker build -t data.stack.proxy:$TAG --build-arg TAG=$HOTFIX --build-arg LATEST_APPCENTER=$LATEST_APPCENTER --build-arg LATEST_AUTHOR=$LATEST_AUTHOR --build-arg LATEST_SWAGGER=$LATEST_SWAGGER .
+    docker build -t datanimbus.io.proxy:$TAG --build-arg TAG=$HOTFIX --build-arg LATEST_APPCENTER=$LATEST_APPCENTER --build-arg LATEST_AUTHOR=$LATEST_AUTHOR --build-arg LATEST_SWAGGER=$LATEST_SWAGGER .
     if [ $CICD ]; then
         if [ $DOCKER_REG ]; then
-            kubectl set image deployment/proxy proxy=$DOCKER_REG/data.stack.proxy:$TAG -n $DATA_STACK_NS --record=true
+            kubectl set image deployment/proxy proxy=$DOCKER_REG/datanimbus.io.proxy:$TAG -n $DATA_STACK_NS --record=true
         else 
-            kubectl set image deployment/proxy proxy=data.stack.proxy:$TAG -n $DATA_STACK_NS --record=true
+            kubectl set image deployment/proxy proxy=datanimbus.io.proxy:$TAG -n $DATA_STACK_NS --record=true
         fi
     fi
 fi
 if [ $DOCKER_REG ]; then
     echo "****************************************************"
-    echo "data.stack.proxy :: Docker Registry found, pushing image"
+    echo "datanimbus.io.proxy :: Docker Registry found, pushing image"
     echo "****************************************************"
 
-    docker tag data.stack.proxy:$TAG $DOCKER_REG/data.stack.proxy:$TAG
-    docker push $DOCKER_REG/data.stack.proxy:$TAG
+    docker tag datanimbus.io.proxy:$TAG $DOCKER_REG/datanimbus.io.proxy:$TAG
+    docker push $DOCKER_REG/datanimbus.io.proxy:$TAG
 fi
 echo "****************************************************"
-echo "data.stack.proxy :: BUILD SUCCESS :: data.stack.proxy:$TAG"
+echo "datanimbus.io.proxy :: BUILD SUCCESS :: datanimbus.io.proxy:$TAG"
 echo "****************************************************"
 echo $TAG > $WORKSPACE/../LATEST_PROXY

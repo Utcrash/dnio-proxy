@@ -6,36 +6,36 @@ TAG=`cat CURRENT_PROXY`
 
 
 echo "****************************************************"
-echo "data.stack:proxy :: Pushing Image to ECR :: $ECR_URL/data.stack.proxy:$TAG"
+echo "datanimbus.io.proxy :: Pushing Image to ECR :: $ECR_URL/datanimbus.io.proxy:$TAG"
 echo "****************************************************"
 
 $(aws ecr get-login --no-include-email)
-docker tag data.stack.proxy:$TAG $ECR_URL/data.stack.proxy:$TAG
-docker push $ECR_URL/data.stack.proxy:$TAG
+docker tag datanimbus.io.proxy:$TAG $ECR_URL/datanimbus.io.proxy:$TAG
+docker push $ECR_URL/datanimbus.io.proxy:$TAG
 
 
 echo "****************************************************"
-echo "data.stack:proxy :: Image pushed to ECR AS $ECR_URL/data.stack.proxy:$TAG"
+echo "datanimbus.io.proxy :: Image pushed to ECR AS $ECR_URL/datanimbus.io.proxy:$TAG"
 echo "****************************************************"
 
-docker tag data.stack.ui-author:$TAG $ECR_URL/data.stack.ui-author:$TAG
-docker push $ECR_URL/data.stack.ui-author:$TAG
+docker tag datanimbus.io.ui-author:$TAG $ECR_URL/datanimbus.io.ui-author:$TAG
+docker push $ECR_URL/datanimbus.io.ui-author:$TAG
 
 echo "****************************************************"
-echo "data.stack:proxy :: Image pushed to ECR AS $ECR_URL/data.stack.ui-author:$TAG"
+echo "datanimbus.io.proxy :: Image pushed to ECR AS $ECR_URL/datanimbus.io.ui-author:$TAG"
 echo "****************************************************"
 
-docker tag data.stack.ui-appcenter:$TAG $ECR_URL/data.stack.ui-appcenter:$TAG
-docker push $ECR_URL/data.stack.ui-appcenter:$TAG
+docker tag datanimbus.io.ui-appcenter:$TAG $ECR_URL/datanimbus.io.ui-appcenter:$TAG
+docker push $ECR_URL/datanimbus.io.ui-appcenter:$TAG
 
 echo "****************************************************"
-echo "data.stack:proxy :: Image pushed to ECR AS $ECR_URL/data.stack.ui-appcenter:$TAG"
+echo "datanimbus.io.proxy :: Image pushed to ECR AS $ECR_URL/datanimbus.io.ui-appcenter:$TAG"
 echo "****************************************************"
 
 
-docker tag data.stack.ui-swagger:$TAG $ECR_URL/data.stack.ui-swagger:$TAG
-docker push $ECR_URL/data.stack.ui-swagger:$TAG
+docker tag datanimbus.io.ui-swagger:$TAG $ECR_URL/datanimbus.io.ui-swagger:$TAG
+docker push $ECR_URL/datanimbus.io.ui-swagger:$TAG
 
 echo "****************************************************"
-echo "data.stack:proxy :: Image pushed to ECR AS $ECR_URL/data.stack.ui-swagger:$TAG"
+echo "datanimbus.io.proxy :: Image pushed to ECR AS $ECR_URL/datanimbus.io.ui-swagger:$TAG"
 echo "****************************************************"

@@ -19,21 +19,21 @@ pipeline {
         stage('SCM UI Author') {
             steps {
                 dir('ds-ui-author') {
-                  git branch: "$BRANCH_NAME", url: 'https://github.com/appveen/ds-ui-author.git'
+                  git branch: "$BRANCH_NAME", url: 'https://github.com/datanimbus/ds-ui-author.git'
                 }
             }
         }
         stage('SCM UI Appcenter') {
             steps {
                 dir('ds-ui-appcenter') {
-                  git branch: "$BRANCH_NAME", url: 'https://github.com/appveen/ds-ui-appcenter.git'
+                  git branch: "$BRANCH_NAME", url: 'https://github.com/datanimbus/ds-ui-appcenter.git'
                 }
             }
         }
         stage('SCM UI Swagger') {
             steps {
                 dir('ds-ui-swagger') {
-                  git branch: "$BRANCH_NAME", url: 'https://github.com/appveen/ds-ui-swagger.git'
+                  git branch: "$BRANCH_NAME", url: 'https://github.com/datanimbus/ds-ui-swagger.git'
                 }
             }
         }

@@ -6,12 +6,12 @@ TAG=`cat CURRENT_PROXY`
 
 
 echo "****************************************************"
-echo "data.stack:proxy :: Deploying Image in K8S :: $NAMESPACE"
+echo "datanimbus.io.proxy :: Deploying Image in K8S :: $NAMESPACE"
 echo "****************************************************"
 
-kubectl set image deployment/proxy proxy=$ECR_URL/data.stack.proxy:$TAG -n $NAMESPACE --record=true
+kubectl set image deployment/proxy proxy=$ECR_URL/datanimbus.io.proxy:$TAG -n $NAMESPACE --record=true
 
 
 echo "****************************************************"
-echo "data.stack:proxy :: Image Deployed in K8S AS $ECR_URL/data.stack.proxy:$TAG"
+echo "datanimbus.io.proxy :: Image Deployed in K8S AS $ECR_URL/datanimbus.io.proxy:$TAG"
 echo "****************************************************"
