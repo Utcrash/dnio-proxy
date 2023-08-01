@@ -29,9 +29,9 @@ RUN env GOOS=linux GOARCH=386 go build -ldflags="-s -w" -o goroute .
 # data.stack Proxy build
 ###############################################################################################
 
-FROM data.stack.ui-author:$LATEST_APPCENTER AS author
-FROM data.stack.ui-appcenter:$LATEST_AUTHOR AS appcenter
-FROM data.stack.ui-swagger:$LATEST_SWAGGER AS swaggerUI
+FROM datanimbus.io.ui-author:$LATEST_APPCENTER AS author
+FROM datanimbus.io.ui-appcenter:$LATEST_AUTHOR AS appcenter
+FROM datanimbus.io.ui-swagger:$LATEST_SWAGGER AS swaggerUI
 
 FROM alpine:latest
 
