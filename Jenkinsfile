@@ -18,22 +18,22 @@ pipeline {
         }
         stage('SCM UI Author') {
             steps {
-                dir('ds-ui-author') {
-                  git branch: "$BRANCH_NAME", url: 'https://github.com/datanimbus/ds-ui-author.git'
+                dir('dnio-ui-author') {
+                  git branch: "$BRANCH_NAME", url: 'https://github.com/datanimbus/dnio-ui-author.git'
                 }
             }
         }
         stage('SCM UI Appcenter') {
             steps {
-                dir('ds-ui-appcenter') {
-                  git branch: "$BRANCH_NAME", url: 'https://github.com/datanimbus/ds-ui-appcenter.git'
+                dir('dnio-ui-appcenter') {
+                  git branch: "$BRANCH_NAME", url: 'https://github.com/datanimbus/dnio-ui-appcenter.git'
                 }
             }
         }
         stage('SCM UI Swagger') {
             steps {
-                dir('ds-ui-swagger') {
-                  git branch: "$BRANCH_NAME", url: 'https://github.com/datanimbus/ds-ui-swagger.git'
+                dir('dnio-ui-swagger') {
+                  git branch: "$BRANCH_NAME", url: 'https://github.com/datanimbus/dnio-ui-swagger.git'
                 }
             }
         }
