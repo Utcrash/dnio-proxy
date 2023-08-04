@@ -69,32 +69,32 @@ if [ $CICD ]; then
 fi
 cd $WORKSPACE
 # echo "****************************************************"
-# echo "datanimbus.io.proxy :: Copying ds-ui-author files"
+# echo "datanimbus.io.proxy :: Copying  o-ui-author files"
 # echo "****************************************************"
 # if [ ! -d author ]; then
 #     mkdir author
 # else
 #     rm -rf author/*
 # fi
-# cp -r $WORKSPACE/../ds-ui-author/dist/* author/
+# cp -r $WORKSPACE/../dnio-ui-author/dist/* author/
 # echo "****************************************************"
-# echo "datanimbus.io.proxy :: Copying ds-ui-appcenter files"
+# echo "datanimbus.io.proxy :: Copying dnio-ui-appcenter files"
 # echo "****************************************************"
 # if [ ! -d appcenter ]; then
 #     mkdir appcenter
 # else
 #     rm -rf appcenter/*
 # fi
-# cp -r $WORKSPACE/../ds-ui-appcenter/dist/* appcenter/
+# cp -r $WORKSPACE/../dnio-ui-appcenter/dist/* appcenter/
 # echo "****************************************************"
-# echo "datanimbus.io.proxy :: Copying ds-ui-swagger files"
+# echo "datanimbus.io.proxy :: Copying dnio-ui-swagger files"
 # echo "****************************************************"
 # if [ ! -d swaggerUI ]; then
 #     mkdir swaggerUI
 # else
 #     rm -rf swaggerUI/*
 # fi
-# cp -r $WORKSPACE/../ds-ui-swagger/* swaggerUI/
+# cp -r $WORKSPACE/../dnio-ui-swagger/* swaggerUI/
 
 echo "****************************************************"
 echo "datanimbus.io.proxy :: using build :: "$TAG

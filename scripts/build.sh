@@ -9,7 +9,7 @@ echo "****************************************************"
 echo "datanimbus.io.proxy :: Building UI Author using TAG :: $TAG"
 echo "****************************************************"
 
-cd $WORKSPACE/ds-ui-author
+cd $WORKSPACE/dnio-ui-author
 
 sed -i.bak s#__image_tag__#$TAG# Dockerfile
 
@@ -28,7 +28,7 @@ echo "****************************************************"
 echo "datanimbus.io.proxy :: Building UI Appcenter using TAG :: $TAG"
 echo "****************************************************"
 
-cd $WORKSPACE/ds-ui-appcenter
+cd $WORKSPACE/dnio-ui-appcenter
 
 sed -i.bak s#__image_tag__#$TAG# Dockerfile
 
@@ -48,7 +48,7 @@ echo "****************************************************"
 echo "datanimbus.io.proxy :: Building UI SwaggerUI using TAG :: $TAG"
 echo "****************************************************"
 
-cd $WORKSPACE/ds-ui-swagger
+cd $WORKSPACE/dnio-ui-swagger
 
 sed -i.bak s#__image_tag__#$TAG# Dockerfile
 
