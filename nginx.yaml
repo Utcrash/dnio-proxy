@@ -7,7 +7,6 @@ spec:
   type: LoadBalancer
   selector:
     app: nginx
-    release: __release_tag__
   ports:
     - protocol: TCP
       name: nginx
@@ -25,12 +24,10 @@ spec:
   selector:
     matchLabels:
       app: nginx
-      release: __release_tag__
   template:
     metadata:
       labels:
         app: nginx
-        release: __release_tag__
     spec:
       volumes:
       - name: odp-nginx-sec
@@ -38,7 +35,7 @@ spec:
           secretName: odp-nginx-sec
       containers:
         - name: nginx
-          image: '__docker_registry_server__/data.stack:nginx.__release__'
+          image: '__docker_registry_server__/datanimbus.io.nginx:__release__'
           ports:
             - containerPort: 32001
           volumeMounts:

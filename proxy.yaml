@@ -7,7 +7,6 @@ spec:
   type: LoadBalancer
   selector:
     app: proxy
-    release: __release_tag__
   ports:
     - protocol: TCP
       name: proxy
@@ -25,12 +24,10 @@ spec:
   selector:
     matchLabels:
       app: proxy
-      release: __release_tag__
   template:
     metadata:
       labels:
         app: proxy
-        release: __release_tag__
     spec:
       volumes:
         - name: ds-proxy-sec
@@ -38,7 +35,7 @@ spec:
             secretName: ds-proxy-sec
       containers:
         - name: proxy
-          image: "__docker_registry_server__/data.stack:proxy.__release__"
+          image: "__docker_registry_server__/datanimbus.io.proxy:__release__"
           ports:
             - containerPort: 32001
           livenessProbe:
